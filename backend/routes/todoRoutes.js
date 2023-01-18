@@ -8,8 +8,11 @@ const {
   deleteToDo,
 } = require("../controller/todoControler");
 
-router.route("/").get(getToDo).post(setToDo);
-router.route("/:id").delete(deleteToDo).put(putToDo);;
+const { protect } = require('../middleware/authMiddleware')
+
+router.route('/').get(protect, getToDo).post(protect, setToDo)
+router.route('/:id').delete(protect, deleteToDo).put(protect, putToDo)
+
 
 
 module.exports = router;
